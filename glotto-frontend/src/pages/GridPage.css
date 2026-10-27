@@ -1,0 +1,45 @@
+.grid-page {
+  padding: 20px;
+  padding-bottom: 90px;
+  background: #E5E5E5;
+  min-height: 100vh;
+  width: 100%; /* Важно: растягиваем на всю ширину */
+  box-sizing: border-box;
+}
+
+.grid-page h2 {
+  color: #93358D;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  border-radius: 10px;
+  border: 2px solid #9FC9EA;
+  margin-bottom: 20px;
+  background: #FFF;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%; /* Сетка тоже должна быть на всю ширину */
+}
+
+/* Стили для заглушки, когда ничего не найдено */
+.no-results {
+  text-align: center;
+  margin-top: 50px;
+  color: #666;
+}
+
+.no-results h4 {
+  color: #93358D;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.no-results p {
+  font-size: 14px;
+}
