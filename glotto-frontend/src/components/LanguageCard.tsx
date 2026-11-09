@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 import type { SwadeshItem } from '../data/mock';
 
-const DEFAULT_IMAGE = "https://via.placeholder.com/300x150?text=No+Image";
+const DEFAULT_IMAGE = "/images/french.jpg";
 
 export const LanguageCard = ({ item }: { item: SwadeshItem }) => {
   return (

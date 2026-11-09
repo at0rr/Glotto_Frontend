@@ -1,32 +1,31 @@
-# React + TypeScript + Vite
+# XRF Alloy Determination — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Клиентское приложение для каталогизации и анализа эталонных сплавов по данным рентгенофлуоресцентной спектроскопии (XRF).
 
-Currently, two official plugins are available:
+## Стек технологий
+* **React 18 + TypeScript**
+* **Vite** (сборка и dev-сервер с проксированием /api)
+* **React Router DOM** (клиентская маршрутизация и Outlet context)
+* **React-Bootstrap** (UI-компоненты)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Описание страниц приложения (Интерфейс гостя)
 
-## React Compiler
+### 1. Нижняя навигационная панель (`TabBar`)
+Располагается в нижней части экрана на всех страницах и содержит 4 пункта:
+* **Лента** (/feed/:id) — активная кнопка, открывает страницу ленты на первой карточке из текущего списка результатов.
+* **Добавление** (/draft) — заблокирована для гостя.
+* **Каталог** (/) — активная кнопка, ведет на страницу плитки карточек и фильтрации.
+* **Вход** (/login) — заблокирована в базовой версии гостя.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 2. Страница «Каталог сплавов» (`/`)
+Отображает фильтр и плитку опубликованных эталонных сплавов в 2 столбца:
+* **Поле фильтрации (Слайдер энергии `input[type="range"]`)** — выбор порогового значения первой высшей частоты (энергии фотонов от 0 до 25 кэВ).
+* **Кнопка «Применить»** — выполняет фильтрацию карточек по выбранной энергии (через API или коллекцию ALLOYS_MOCK).
+* **Карточки сплавов (`AlloyCard`)** — отображают изображение артефакта (или /default.png по умолчанию), сокращенное название и количество лайков. Клик по карточке переводит на страницу Ленты для выбранного сплава.
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 3. Страница «Лента сплавов» (`/feed/:id`)
+Вертикальный экран просмотра карточки сплава:
+* **Медиа-блок** — автоматически проигрывает видео процесса XRF-анализа (или /default.mp4 / /default.png при отсутствии ссылки).
+* **Информационная плашка** — отображает название сплава и раскрывающийся по кнопке **«еще»** блок (<details>) с историческим описанием, первой высшей частотой (кэВ) и интенсивностью (cps).
+* **Блок лайков** — отображает иконку сердца и счетчик лайков.
+* **Кнопка «Далее» (`➔`)** — переключает карточку на следующий сплав по порядку из текущего отфильтрованного списка.

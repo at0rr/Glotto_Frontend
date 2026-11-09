@@ -19,7 +19,7 @@ export const GridPage = () => {
 
       <Form.Control
         type="text"
-        placeholder="Фильтр по году (например, 1500)..."
+        placeholder="Фильтр по году (например, 1500)"
         value={searchYear}
         onChange={(e) => setSearchYear(e.target.value)}
         className="search-input"

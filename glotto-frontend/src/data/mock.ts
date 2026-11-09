@@ -25,9 +25,10 @@ export const MOCK_LANGUAGES: SwadeshItem[] = [
     image_url: "https://flagcdn.com/w320/ru.png",
     video_url: "/videos/russian.mp4",
     likes: 3,
+    // Копируем данные из БД (2 атрибута)
     attributes: [
       { name: "Языковая семья", value: "Индоевропейская" },
-      { name: "Регион", value: "Восточная Европа" }
+      { name: "Размер списка", value: "100 слов" }
     ]
   },
   {
@@ -41,21 +42,21 @@ export const MOCK_LANGUAGES: SwadeshItem[] = [
     likes: 2,
     attributes: [
       { name: "Языковая семья", value: "Индоевропейская" },
-      { name: "Регион", value: "Британские острова" }
+      { name: "Размер списка", value: "100 слов" }
     ]
   },
   {
     id: 3,
     title: "Немецкий",
-    description: "Список Сводеша для немецкого языка. Используется в сравнительно-историческом языкознании.",
+    description: "Список Сводеша для немецкого языка.",
     match_percent: 68,
     divergence_date: "500 г.",
-    image_url: "https://flagcdn.com/w320/de.png",
+    image_url: "",
     video_url: "",
     likes: 2,
     attributes: [
       { name: "Языковая семья", value: "Индоевропейская" },
-      { name: "Регион", value: "Центральная Европа" }
+      { name: "Размер списка", value: "200 слов" } // Разнообразим данные
     ]
   }
 ];
