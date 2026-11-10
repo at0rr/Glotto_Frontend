@@ -1,17 +1,20 @@
-import { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { MOCK_LANGUAGES } from '../data/mock';
+import { useEffect } from 'react';
+import { Form, Spinner } from 'react-bootstrap'; // Добавили Spinner
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../store';
+import { fetchLanguages } from '../store/languagesSlice';
+import { setSearchYear } from '../store/filterSlice';
 import { LanguageCard } from '../components/LanguageCard';
 import './GridPage.css';
 
 export const GridPage = () => {
-  const [searchYear, setSearchYear] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
+  const { items, loading, error } = useSelector((state: RootState) => state.languages);
+  const { searchYear } = useSelector((state: RootState) => state.filters);
 
-  // Фильтрация по году расхождения
-  const filteredLanguages = MOCK_LANGUAGES.filter(item => {
-    if (searchYear === '') return true;
-    return item.divergence_date.includes(searchYear);
-  });
+  useEffect(() => {
+    dispatch(fetchLanguages(searchYear));
+  }, [dispatch, searchYear]);
 
   return (
     <div className="grid-page">
@@ -19,18 +22,31 @@ export const GridPage = () => {
 
       <Form.Control
         type="text"
-        placeholder="Фильтр по году (например, 1500)"
+        placeholder="Фильтр по году..."
         value={searchYear}
-        onChange={(e) => setSearchYear(e.target.value)}
+        onChange={(e) => dispatch(setSearchYear(e.target.value))}
         className="search-input"
+        disabled={loading} // БЛОКИРУЕМ поле, пока идет загрузка
       />
 
-      {/* Просто сетка. Если пусто, она ничего не отрисует */}
-      <div className="grid-container">
-        {filteredLanguages.map(item => (
-          <LanguageCard key={item.id} item={item} />
-        ))}
-      </div>
+      {/* АНИМАЦИЯ ЗАГРУЗКИ */}
+      {loading && (
+        <div className="text-center my-4">
+          <Spinner animation="border" variant="primary" />
+          <p>Загрузка данных...</p>
+        </div>
+      )}
+
+      {error && <div className="text-danger">{error}</div>}
+
+      {/* Показываем карточки, только если нет загрузки */}
+      {!loading && (
+        <div className="grid-container">
+          {items.map(item => (
+            <LanguageCard key={item.id} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
