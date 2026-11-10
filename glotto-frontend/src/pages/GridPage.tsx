@@ -21,12 +21,12 @@ export const GridPage = () => {
       <h2>Все языки</h2>
 
       <Form.Control
-        type="text"
+        type="date" // <--- ИЗМЕНЕНИЕ
         placeholder="Фильтр по году..."
         value={searchYear}
         onChange={(e) => dispatch(setSearchYear(e.target.value))}
         className="search-input"
-        disabled={loading} // БЛОКИРУЕМ поле, пока идет загрузка
+        disabled={loading}
       />
 
       {/* АНИМАЦИЯ ЗАГРУЗКИ */}

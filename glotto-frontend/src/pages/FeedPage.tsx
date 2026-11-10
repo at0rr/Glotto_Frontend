@@ -10,6 +10,7 @@ const DEFAULT_VIDEO = "/videos/default.mp4";
 export const FeedPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { feedItem, loading } = useSelector((state: RootState) => state.languages);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   // Состояние для кнопки "Еще"
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,6 +29,7 @@ export const FeedPage = () => {
   };
 
   const handleLike = () => {
+    if (!isAuthenticated) return;
     const action = feedItem.is_liked ? 0 : 1;
     dispatch(toggleLike({ id: feedItem.id!, like: action }));
   };
