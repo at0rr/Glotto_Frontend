@@ -43,3 +43,14 @@
 .no-results p {
   font-size: 14px;
 }
+
+/* Переопределяем стили календаря, чтобы он был поверх всего */
+.react-datepicker-wrapper {
+    width: 100%;
+}
+.react-datepicker__input-container input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #9FC9EA;
+}

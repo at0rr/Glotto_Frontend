@@ -4,12 +4,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
-  user: { id: number; login: string } | null;
+  user: { id: number; login: string; role?: number } | null;
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem('token'),
-  isAuthenticated: !!localStorage.getItem('token'),
+  token: null,
+  isAuthenticated: false,
   user: null,
 };
 
