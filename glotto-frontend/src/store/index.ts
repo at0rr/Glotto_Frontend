@@ -7,8 +7,9 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     filters: filterReducer,
-    languages: languagesReducer, // И он добавлен сюда
+    languages: languagesReducer,
   },
+  devTools: true,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
